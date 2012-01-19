@@ -150,13 +150,13 @@ lapictimerinit(void)
 		lapictimer.max = lapictimer.hz/HZ;
 		lapictimer.min = lapictimer.hz/(100*HZ);
 
-		if(lapictimer.hz > hz-(hz/10)){
-			if(lapictimer.hz > hz+(hz/10))
+		if(lapictimer.hz > m->cpuhz-(m->cpuhz/10)){
+			if(lapictimer.hz > m->cpuhz+(m->cpuhz/10))
 				panic("lapic clock %lld > cpu clock > %lld\n",
-					lapictimer.hz, hz);
-			lapictimer.hz = hz;
+					lapictimer.hz, m->cpuhz);
+			lapictimer.hz = m->cpuhz;
 		}
-		lapictimer.div = hz/lapictimer.hz;
+		lapictimer.div = m->cpuhz/lapictimer.hz;
 	}
 }
 
